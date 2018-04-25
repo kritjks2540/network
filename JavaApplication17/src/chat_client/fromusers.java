@@ -152,7 +152,6 @@ public class fromusers extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("All Stars Chat Application ");
         setBackground(new java.awt.Color(0, 0, 255));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("icons.png")));
         setName("client"); // NOI18N
         setResizable(false);
 
@@ -277,6 +276,7 @@ public class fromusers extends javax.swing.JFrame
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        getAccessibleContext().setAccessibleName("");
         getAccessibleContext().setAccessibleDescription("");
 
         pack();
