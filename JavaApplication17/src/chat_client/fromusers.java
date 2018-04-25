@@ -8,7 +8,7 @@ import java.util.*;
 
 public class fromusers extends javax.swing.JFrame 
 {
-    String username, address = "localhost";
+    String username, address = "25.17.45.127";
     ArrayList<String> users = new ArrayList();
     int port = 2222;
     Boolean isConnected = false;
