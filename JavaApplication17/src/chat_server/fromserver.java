@@ -1,10 +1,11 @@
 package chat_server;
 
+import java.awt.Color;
 import java.io.*;
 import java.net.*;
 import java.util.*;
 
-public class server_frame extends javax.swing.JFrame 
+public class fromserver extends javax.swing.JFrame 
 {
    ArrayList clientOutputStreams;
    ArrayList<String> users;
@@ -78,9 +79,10 @@ public class server_frame extends javax.swing.JFrame
 	} 
     }
 
-    public server_frame() 
+    public fromserver() 
     {
         initComponents();
+         this.getContentPane().setBackground(Color.decode("#f2efea"));
     }
 
     @SuppressWarnings("unchecked")
@@ -90,7 +92,6 @@ public class server_frame extends javax.swing.JFrame
         jScrollPane1 = new javax.swing.JScrollPane();
         ta_chat = new javax.swing.JTextArea();
         b_start = new javax.swing.JButton();
-        b_end = new javax.swing.JButton();
         b_users = new javax.swing.JButton();
         b_clear = new javax.swing.JButton();
 
@@ -110,14 +111,7 @@ public class server_frame extends javax.swing.JFrame
             }
         });
 
-        b_end.setText("END");
-        b_end.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_endActionPerformed(evt);
-            }
-        });
-
-        b_users.setText("Online Users");
+        b_users.setText("User Online");
         b_users.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b_usersActionPerformed(evt);
@@ -137,49 +131,31 @@ public class server_frame extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(b_start, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(b_end, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(b_start, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(b_clear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(b_users, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))))
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(b_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(b_users, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(b_start)
-                    .addComponent(b_users))
-                .addGap(18, 18, 18)
+                .addComponent(b_start)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(b_clear)
-                    .addComponent(b_end))
-                .addGap(20, 20, 20))
+                    .addComponent(b_users))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void b_endActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_endActionPerformed
-        try 
-        {
-            Thread.sleep(5000);                 //5000 milliseconds is five second.
-        } 
-        catch(InterruptedException ex) {Thread.currentThread().interrupt();}
-        
-        tellEveryone("[ระบบ] ตอนนี้เซิฟเวอร์ได้หยุดการเชื่อมยูสเซอร์ทุกคนจะโดนตัดการเชื่อมต่อ\n:Chat");
-        ta_chat.append("เซิฟเวอร์กำลังปิดตัว \n");
-        
-        ta_chat.setText("");
-    }//GEN-LAST:event_b_endActionPerformed
 
     private void b_startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_startActionPerformed
         Thread starter = new Thread(new ServerStart());
@@ -190,9 +166,10 @@ public class server_frame extends javax.swing.JFrame
 
     private void b_usersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_usersActionPerformed
         ta_chat.append("\n ยูสเซอร์ที่ออนไลน์ : \n");
+       
         for (String current_user : users)
         {
-            ta_chat.append(current_user);
+            ta_chat.append("Name:"+current_user);
             ta_chat.append("\n");
         }    
         
@@ -208,7 +185,7 @@ public class server_frame extends javax.swing.JFrame
         {
             @Override
             public void run() {
-                new server_frame().setVisible(true);
+                new fromserver().setVisible(true);
             }
         });
     }
@@ -299,7 +276,6 @@ public class server_frame extends javax.swing.JFrame
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_clear;
-    private javax.swing.JButton b_end;
     private javax.swing.JButton b_start;
     private javax.swing.JButton b_users;
     private javax.swing.JScrollPane jScrollPane1;
